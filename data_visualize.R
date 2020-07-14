@@ -156,10 +156,16 @@ data %>%
   ggplot(aes(x = oldpeak)) +
   geom_histogram(fill = "red", alpha = .6) +
   theme_minimal()
-# ------- may need to log transform old peak
+# ------- may need to transform old peak
+
 
 data %>%
-  ggplot(aes(x = ca)) +
+  ggplot(aes(x = age)) +
+  geom_histogram(fill = "red", alpha = .6) +
+  theme_minimal()
+
+data %>%
+  ggplot(aes(x = cp)) +
   geom_histogram(fill = "red", alpha = .6) +
   theme_minimal()
 

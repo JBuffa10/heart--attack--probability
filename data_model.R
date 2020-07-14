@@ -106,14 +106,14 @@ FN = 10
 
 
 
-ROCpred <- prediction(pred, testData$targe)
+ROCpred <- prediction(pred, testData$target)
 ROCperf <- performance(ROCpred, 'tpr','fpr')
 plot(ROCperf, colorize = TRUE, text.adj = c(-.2,1.7))
 
 
 
 #### Add Thalach ####
-updated <- update(mlm, ~. + thalach)
+updated <- update(mlm, ~. + thalach + cp)
 
 pp_check(updated)
 
@@ -149,7 +149,13 @@ p_sim_update %>%
 p_sim_update %>%
   ggplot() +
   geom_histogram(aes(x = thalach), fill = "navy blue", alpha = .6) +
-  geom_histogram(aes(x = sex1), fill = "orange", alpha = .6) +
+  xlim(0,1) +
+  theme_minimal()
+
+
+p_sim_update %>%
+  ggplot() +
+  geom_histogram(aes(x = cp), fill = "navy blue", alpha = .6) +
   xlim(0,1) +
   theme_minimal()
 
@@ -160,10 +166,10 @@ pred_update <- colMeans(pred_update, dims = 1)
 
 table(testData$target, pred_update > .5)
 
-TP = 39
-TN = 30
-FP = 15
-FN = 6
+TP = 36
+TN = 34
+FP = 11
+FN = 9
 
 # Accuracy
 (TP + TN)/(TP+TN+FP+FN)
